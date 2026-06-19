@@ -1,14 +1,17 @@
-import axios from "axios"
+import axios from "axios";
 
-const fetchcategory =async()=>{
-    try {
- const response =await axios.get("http://localhost:5050/ref/category")
- console.log(response);
- return response;
-        
-    } catch (error) {
-        return null
-        
-    }
+export const getcategory = async () => {
+  try {
+    const response = await axios.get("http://localhost:5050/ref/category");
+    if(response.data.success){
+    return response.data 
 }
-module.exports={fetchcategory}
+else{
+    throw new Error("Fail Api")
+}
+  } catch (error) {
+    console.log(error);
+    throw new Error
+  }
+
+};

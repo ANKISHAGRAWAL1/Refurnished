@@ -12,7 +12,8 @@
     "cors": "^2.8.6",
     "dotenv": "^17.4.2",
     "express": "^5.2.1",
-    "mongoose": "^9.7.0"
+    "mongoose": "^9.7.0",
+    "react-toastify": "^11.1.0"
   },
   "devDependencies": {
     "concurrently": "^10.0.3",

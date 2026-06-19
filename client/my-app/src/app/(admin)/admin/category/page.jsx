@@ -1,40 +1,19 @@
-"use client";
-
 import { FaEdit, FaTrash } from "react-icons/fa";
+import { getcategory } from "@/Api-call/get_Api";
+import Link from "next/link";
+import Status from "@/app/components/admin/status";
 
-export default function CategoryPage() {
-  const categories = [
-    {
-      id: 1,
-      name: "Laptop",
-      slug: "laptop",
-      status: true,
-      isHome: true,
-      isPopular: false,
-      isTop: true,
-      isBest: false,
-    },
-    {
-      id: 2,
-      name: "Desktop",
-      slug: "desktop",
-      status: false,
-      isHome: false,
-      isPopular: true,
-      isTop: false,
-      isBest: true,
-    },
-    {
-      id: 3,
-      name: "Monitor",
-      slug: "monitor",
-      status: true,
-      isHome: true,
-      isPopular: true,
-      isTop: false,
-      isBest: true,
-    },
-  ];
+export default async function CategoryPage() {
+  let categories = [];
+  let meta = {};
+
+  try {
+    const res = await getcategory();
+    categories = res.data;
+    meta = res.meta;
+  } catch (error) {
+    console.log(error);
+  }
 
   return (
     <div className="p-6">
@@ -42,16 +21,19 @@ export default function CategoryPage() {
       <div className="flex items-center justify-between mb-6">
         <h1 className="text-2xl font-bold">Categories</h1>
 
-        <button className="bg-indigo-600 hover:bg-indigo-700 text-white px-5 py-2 rounded-xl shadow">
-          + Add Category
-        </button>
+        <Link href="/admin/category/add">
+          <button className="bg-indigo-600 hover:bg-indigo-700 text-white px-5 py-2 rounded-xl shadow">
+            + Add Category
+          </button>
+        </Link>
       </div>
 
-      {/* Table Card */}
+      {/* Table */}
       <div className="bg-white rounded-2xl shadow-lg overflow-x-auto">
         <table className="w-full">
           <thead className="bg-slate-100 text-slate-700">
             <tr>
+              <th className="px-6 py-4 text-left">Image</th>
               <th className="px-6 py-4 text-left">Name</th>
               <th className="px-6 py-4 text-left">Slug</th>
               <th className="px-6 py-4 text-center">Status</th>
@@ -64,45 +46,102 @@ export default function CategoryPage() {
           </thead>
 
           <tbody>
-            {categories.map((item) => (
-              <tr
-                key={item.id}
-                className="border-b hover:bg-slate-50 transition"
-              >
-                <td className="px-6 py-4 font-medium">{item.name}</td>
-
-                <td className="px-6 py-4 text-gray-500">{item.slug}</td>
-
-                <td className="px-6 py-4 text-center">
-                  <span
-                    className={`px-3 py-1 rounded-full text-sm ${
-                      item.status
-                        ? "bg-green-100 text-green-700"
-                        : "bg-red-100 text-red-700"
-                    }`}
-                  >
-                    {item.status ? "Active" : "Inactive"}
-                  </span>
-                </td>
-
-                <td className="text-center">{item.isHome ? "✅" : "❌"}</td>
-                <td className="text-center">{item.isPopular ? "✅" : "❌"}</td>
-                <td className="text-center">{item.isTop ? "✅" : "❌"}</td>
-                <td className="text-center">{item.isBest ? "✅" : "❌"}</td>
-
-                <td className="px-6 py-4">
-                  <div className="flex justify-center gap-3">
-                    <button className="bg-blue-100 p-2 rounded-lg text-blue-600 hover:bg-blue-200">
-                      <FaEdit />
-                    </button>
-
-                    <button className="bg-red-100 p-2 rounded-lg text-red-600 hover:bg-red-200">
-                      <FaTrash />
-                    </button>
-                  </div>
+            {categories.length === 0 ? (
+              <tr>
+                <td colSpan={9} className="text-center py-6">
+                  Category not found
                 </td>
               </tr>
-            ))}
+            ) : (
+              categories.map((item) => (
+                <tr
+                  key={item._id}
+                  className="border-b hover:bg-slate-50 transition"
+                >
+                  {/* Image */}
+                  <td className="px-6 py-4">
+                    <img
+                      src={item.image}
+                      alt={item.name}
+                      className="w-14 h-14 rounded-lg object-cover"
+                    />
+                  </td>
+
+                  {/* Name */}
+                  <td className="px-6 py-4 font-medium">
+                    {item.name}
+                  </td>
+
+                  {/* Slug */}
+                  <td className="px-6 py-4 text-gray-500">
+                    {item.slug}
+                  </td>
+
+                  {/* Status */}
+                  <td className="px-6 py-4 text-center">
+                    <Status
+                      value={item.status}
+                      id={item._id}
+                      field="status"
+                      endpoint="category"
+                    />
+                  </td>
+
+                  {/* Home */}
+                  <td className="px-6 py-4 text-center">
+                    <Status
+                      value={item.home}
+                      id={item._id}
+                      field="home"
+                      endpoint="category"
+                    />
+                  </td>
+
+                  {/* Popular */}
+                  <td className="px-6 py-4 text-center">
+                    <Status
+                      value={item.popular}
+                      id={item._id}
+                      field="popular"
+                      endpoint="category"
+                    />
+                  </td>
+
+                  {/* Top */}
+                  <td className="px-6 py-4 text-center">
+                    <Status
+                      value={item.top}
+                      id={item._id}
+                      field="top"
+                      endpoint="category"
+                    />
+                  </td>
+
+                  {/* Best */}
+                  <td className="px-6 py-4 text-center">
+                    <Status
+                      value={item.best}
+                      id={item._id}
+                      field="best"
+                      endpoint="category"
+                    />
+                  </td>
+
+                  {/* Action */}
+                  <td className="px-6 py-4">
+                    <div className="flex justify-center gap-3">
+                      <button className="bg-blue-100 p-2 rounded-lg text-blue-600 hover:bg-blue-200">
+                        <FaEdit />
+                      </button>
+
+                      <button className="bg-red-100 p-2 rounded-lg text-red-600 hover:bg-red-200">
+                        <FaTrash />
+                      </button>
+                    </div>
+                  </td>
+                </tr>
+              ))
+            )}
           </tbody>
         </table>
       </div>

@@ -2,6 +2,7 @@ import { Geist, Geist_Mono } from "next/font/google";
 import "@/app/globals.css";
 import Sidebar from "./Sidebar";
 import Header from "./Header";
+import { ToastContainer, toast } from 'react-toastify';
  
 
 const geistSans = Geist({
@@ -27,6 +28,22 @@ export default function RootLayout({ children }) {
     >
       <body className="min-h-full w-full flex ">
         <div className="min-h-screen w-64 ">
+
+<ToastContainer
+position="top-right"
+autoClose={1000}
+hideProgressBar={false}
+newestOnTop={false}
+closeOnClick={false}
+rtl={false}
+pauseOnFocusLoss
+draggable
+pauseOnHover
+theme="colored"
+ 
+/>
+
+
          <Sidebar/>
           </div>
 

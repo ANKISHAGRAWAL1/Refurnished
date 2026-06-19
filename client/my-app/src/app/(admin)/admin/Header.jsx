@@ -9,7 +9,7 @@ import {
 
 export default function Header() {
   return (
-    <header className="h-16 bg-white border-b border-gray-200 px-6 flex items-center justify-between shadow-sm">
+   <header className="fixed top-0 left-0 w-full h-16 bg-white border-b border-gray-200 px-6 flex items-center justify-between shadow-sm z-50">
       {/* Left */}
       <div>
         <h1 className="text-2xl font-bold text-gray-800">

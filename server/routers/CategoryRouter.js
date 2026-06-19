@@ -1,11 +1,8 @@
 const categoryRouter = require("express").Router();
-const{creat,read,status}=   require("../controllers/categoryController.js")
+const { creat, read, status } = require("../controllers/categoryController.js");
 
-categoryRouter.post("/creat",creat)
-categoryRouter.get("/",read)
-categoryRouter.get("/update/:id",status)
+categoryRouter.post("/creat",creat);
+categoryRouter.get("/", read);
+categoryRouter.patch("/update/:id", status);
 
-
-
-
-module.exports =categoryRouter;
+module.exports = categoryRouter;
