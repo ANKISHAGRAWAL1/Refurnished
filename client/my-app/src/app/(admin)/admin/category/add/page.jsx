@@ -1,6 +1,6 @@
 "use client";
 
-import axios from "axios";
+import { client } from "@/app/components/utils/helper";
 import { useRef, useState } from "react";
 import { notify } from "@/app/components/utils/helper";
 import { useRouter } from "next/navigation";
@@ -38,9 +38,7 @@ export default function AddCategoryPage() {
     };
 
     try {
-      const response = await axios.post(
-        "http://localhost:5050/ref/category/creat",
-        payload
+      const response = await client.post("category/creat", payload
       );
        notify(response.data.message,response.data.success)
     if (response.data.success) {
@@ -48,10 +46,7 @@ export default function AddCategoryPage() {
         slugref.current.value=""
 }router.push("/admin/category")
     } catch (error) {
-    notify(
-    error.response?.data?.message || "Internal Server Error",
-    false
-  );
+    notify(error.response?.data?.message || "Internal Server Error",false);
 }
      
       
@@ -94,7 +89,7 @@ export default function AddCategoryPage() {
         <div>
           <label className="block mb-2 font-medium">Image URL</label>
           <input
-            type="image"
+            type="file"
             ref={imageref}
             
             placeholder="Enter image URL"

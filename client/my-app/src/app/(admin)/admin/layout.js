@@ -42,9 +42,7 @@ pauseOnHover
 theme="colored"
  
 />
-
-
-         <Sidebar/>
+ <Sidebar/>
           </div>
 
   <div className="flex-1">

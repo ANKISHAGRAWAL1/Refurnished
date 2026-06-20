@@ -92,8 +92,29 @@ const status = async (req, res) => {
   }
 };
 
+
+const deletebyid = async (req, res) => {
+  try {
+    const { id } = req.params;
+
+    const category = await category_model.findById(id);
+
+    if (!category) {
+      return sendNotfound(res, "Category not found");
+    }
+
+    await category_model.findByIdAndDelete(id);
+
+    return sendOk(res, "Category Deleted");
+  } catch (error) {
+    console.log(error);
+    return sendServerError(res, "Internal Server Error");
+  }
+};
+
 module.exports = {
   creat,
   read,
   status,
+  deletebyid
 };

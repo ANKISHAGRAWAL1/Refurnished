@@ -1,14 +1,14 @@
+import { client } from "@/app/components/utils/helper";
 import axios from "axios";
 
 export const getcategory = async () => {
   try {
-    const response = await axios.get("http://localhost:5050/ref/category");
-    if(response.data.success){
-    return response.data 
+    const response = await client.get("category");
+    if(!response.data.success){
+    throw new Error( response.data.message || "Fail Api")
 }
-else{
-    throw new Error("Fail Api")
-}
+return response.data
+ 
   } catch (error) {
     console.log(error);
     throw new Error

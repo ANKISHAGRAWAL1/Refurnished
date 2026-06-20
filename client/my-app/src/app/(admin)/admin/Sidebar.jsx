@@ -17,45 +17,21 @@ export default function Sidebar() {
   const [open, setOpen] = useState(true);
 
   const menuItems = [
-    {
-      title: "Dashboard",
-      icon: <FiGrid />,
-      href: "/admin",
-    },
-    {
-      title: "Products",
-      icon: <FiBox />,
-      href: "/admin/products",
-    },
-    {
-      title: "Orders",
-      icon: <FiShoppingCart />,
-      href: "/admin/orders",
-    },
-    {
-      title: "Users",
-      icon: <FiUsers />,
-      href: "/admin/users",
-    },
-    {
-      title: "Categories",
-      icon: <FiLayers />,
-      href: "/admin/categories",
-    },
-    {
-      title: "Settings",
-      icon: <FiSettings />,
-      href: "/admin/settings",
-    },
+    { title: "Dashboard", icon: <FiGrid />, href: "/admin" },
+    { title: "Products", icon: <FiBox />, href: "/admin/products" },
+    { title: "Orders", icon: <FiShoppingCart />, href: "/admin/orders" },
+    { title: "Users", icon: <FiUsers />, href: "/admin/users" },
+    { title: "Categories", icon: <FiLayers />, href: "/admin/categories" },
+    { title: "Settings", icon: <FiSettings />, href: "/admin/settings" },
   ];
 
   return (
     <aside
       className={`${
         open ? "w-64" : "w-20"
-      } min-h-screen bg-slate-900 text-white flex flex-col transition-all duration-300`}
+      } h-screen sticky top-0 bg-slate-900 text-white flex flex-col transition-all duration-300`}
     >
-      {/* Logo */}
+      {/* Header */}
       <div className="h-16 flex items-center justify-between px-4 border-b border-slate-800">
         {open && (
           <h1 className="text-2xl font-bold text-blue-500">
@@ -64,27 +40,31 @@ export default function Sidebar() {
         )}
 
         <button
-          className="text-2xl"
           onClick={() => setOpen(!open)}
+          className="text-xl p-2 rounded hover:bg-slate-800"
         >
           <FaBars />
         </button>
       </div>
 
       {/* Menu */}
-      <nav className="flex-1 py-6">
+      <nav className="flex-1 overflow-y-auto py-4">
         <ul className="space-y-2 px-3">
           {menuItems.map((item) => (
             <li key={item.title}>
               <Link
                 href={item.href}
                 className={`flex items-center ${
-                  open ? "justify-start gap-4 px-4" : "justify-center"
-                } py-3 rounded-lg hover:bg-slate-800 transition-all`}
+                  open ? "gap-4 px-4 justify-start" : "justify-center"
+                } py-3 rounded-lg hover:bg-slate-800 transition`}
               >
                 <span className="text-xl">{item.icon}</span>
 
-                {open && <span>{item.title}</span>}
+                {open && (
+                  <span className="whitespace-nowrap">
+                    {item.title}
+                  </span>
+                )}
               </Link>
             </li>
           ))}
@@ -92,11 +72,11 @@ export default function Sidebar() {
       </nav>
 
       {/* Logout */}
-      <div className="p-4 border-t border-slate-800">
+      <div className="border-t border-slate-800 p-3">
         <button
           className={`w-full flex items-center ${
-            open ? "justify-start gap-4 px-4" : "justify-center"
-          } py-3 rounded-lg hover:bg-red-600 transition-all`}
+            open ? "gap-4 px-4 justify-start" : "justify-center"
+          } py-3 rounded-lg hover:bg-red-600 transition`}
         >
           <FiLogOut className="text-xl" />
           {open && <span>Logout</span>}

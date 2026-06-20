@@ -1,11 +1,16 @@
 "use client";
 
+import { useState, useEffect } from "react";
 import axios from "axios";
-import { useRouter } from "next/navigation";
 import { notify } from "@/app/components/utils/helper";
 
 export default function Status({ value, id, field, endpoint }) {
-  const router = useRouter();
+  const [status, setStatus] = useState(value);
+
+   
+  useEffect(() => {
+    setStatus(value);
+  }, [value]);
 
   const statusHandler = async () => {
     try {
@@ -17,10 +22,9 @@ export default function Status({ value, id, field, endpoint }) {
       notify(response.data.message, response.data.success);
 
       if (response.data.success) {
-        router.refresh();
+        setStatus((prev) => !prev);
       }
     } catch (error) {
-        
       notify(
         error.response?.data?.message || "Internal Server Error",
         false
@@ -36,19 +40,18 @@ export default function Status({ value, id, field, endpoint }) {
     home: ["Yes", "No"],
   };
 
-  const [trueLabel, falseLabel] =
-    label[field] || ["Yes", "No"];
+  const [trueLabel, falseLabel] = label[field] || ["Yes", "No"];
 
   return (
     <button
       onClick={statusHandler}
       className={`px-3 py-1 rounded-full text-xs ${
-        value
-          ? "bg-green-100 text-green-600"
+        status
+          ? "bg-green-200v  text-green-600"
           : "bg-red-100 text-red-600"
       }`}
     >
-      {value ? trueLabel : falseLabel}
+      {status ? trueLabel : falseLabel}
     </button>
   );
 }
