@@ -28,14 +28,11 @@ export default function AddCategoryPage() {
   // Submit handler
   const submitHandler = async (e) => {
     e.preventDefault();
-
-    setLoading(true);
-
-    const payload = {
-      name: nameref.current.value,
-      slug: slugref.current.value,
-      image: imageref.current.value,
-    };
+     setLoading(true);
+const payload =new FormData();
+payload.append("name", nameref.current.value);
+payload.append("slug", slugref.current.value);
+payload.append("image", imageref.current.files[0]);
 
     try {
       const response = await client.post("category/creat", payload
@@ -43,8 +40,8 @@ export default function AddCategoryPage() {
        notify(response.data.message,response.data.success)
     if (response.data.success) {
         nameref.current.value="";
-        slugref.current.value=""
-}router.push("/admin/category")
+        slugref.current.value=""     }
+       router.push("/admin/category")
     } catch (error) {
     notify(error.response?.data?.message || "Internal Server Error",false);
 }
@@ -90,7 +87,9 @@ export default function AddCategoryPage() {
           <label className="block mb-2 font-medium">Image URL</label>
           <input
             type="file"
+            accept="images"
             ref={imageref}
+            name="images"
             
             placeholder="Enter image URL"
             className="w-full border rounded-lg p-3 outline-none"

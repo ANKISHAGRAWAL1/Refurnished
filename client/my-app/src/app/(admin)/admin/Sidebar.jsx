@@ -21,7 +21,7 @@ export default function Sidebar() {
     { title: "Products", icon: <FiBox />, href: "/admin/products" },
     { title: "Orders", icon: <FiShoppingCart />, href: "/admin/orders" },
     { title: "Users", icon: <FiUsers />, href: "/admin/users" },
-    { title: "Categories", icon: <FiLayers />, href: "/admin/categories" },
+    { title: "Categories", icon: <FiLayers />, href: "/admin/category" },
     { title: "Settings", icon: <FiSettings />, href: "/admin/settings" },
   ];
 

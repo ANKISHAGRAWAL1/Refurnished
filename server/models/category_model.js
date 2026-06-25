@@ -26,12 +26,12 @@ const categorySchema = new mongoose.Schema(
       default: "",
     },
 
-   
-     isActive: {
+    isActive: {
       type: Boolean,
       default: true,
     },
-     isHome: {
+
+    isHome: {
       type: Boolean,
       default: true,
     },
@@ -44,6 +44,7 @@ const categorySchema = new mongoose.Schema(
       default: true,
     },
   },
+
   {
     timestamps: true,
   }

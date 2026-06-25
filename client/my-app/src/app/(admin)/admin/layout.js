@@ -55,12 +55,7 @@ theme="colored"
         
           </div>
 
-       
-
- 
-      
-        
-        </body>
+       </body>
     </html>
   );
 }

@@ -33,24 +33,23 @@ export default function Status({ value, id, field, endpoint }) {
   };
 
   const label = {
-    status: ["Active", "Inactive"],
-    top: ["Top", "Not Top"],
-    popular: ["Yes", "No"],
-    best: ["Yes", "No"],
-    home: ["Yes", "No"],
-  };
-
+  isActive: ["Active", "Inactive"],
+  isTop: ["Top", "Not Top"],
+  isPopular: ["Popilar", "NoPopular"],
+  isBest: ["Best", "Notbeast"],
+  isHome: ["Home", "Notome"],
+};
   const [trueLabel, falseLabel] = label[field] || ["Yes", "No"];
 
   return (
     <button
-      onClick={statusHandler}
-      className={`px-3 py-1 rounded-full text-xs ${
-        status
-          ? "bg-green-200v  text-green-600"
-          : "bg-red-100 text-red-600"
-      }`}
-    >
+  onClick={statusHandler}
+  className={`px-3 py-1 rounded-full text-xs mx-1 ${
+    status
+      ? "bg-green-100 text-green-600"
+      : "bg-red-100 text-red-600"
+  }`}
+>
       {status ? trueLabel : falseLabel}
     </button>
   );

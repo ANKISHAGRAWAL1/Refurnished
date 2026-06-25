@@ -6,8 +6,11 @@ const app = express();
 
 app.use(express.json());
 app.use(cors("*"));
+app.use(express.static("./public"))
 
 app.use("/ref/category",require("./routers/CategoryRouter"))
+app.use("/ref/brand",require("./routers/brandrouter"))
+app.use("/ref/color",require("./routers/color_router"))
 
 mongoose
   .connect
