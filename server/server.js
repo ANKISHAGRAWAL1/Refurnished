@@ -11,6 +11,7 @@ app.use(express.static("./public"))
 app.use("/ref/category",require("./routers/CategoryRouter"))
 app.use("/ref/brand",require("./routers/brandrouter"))
 app.use("/ref/color",require("./routers/color_router"))
+app.use("/ref/series",require("./routers/seriesrouter"))
 
 mongoose
   .connect

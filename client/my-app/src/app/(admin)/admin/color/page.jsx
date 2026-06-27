@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import { color as getColors } from "@/Api-call/get_Api";
 import Link from "next/link";
+import Delete from "@/app/components/admin/Delete";
 
 export default function ColorPage() {
   const [colors, setColors] = useState([]);
@@ -75,7 +76,8 @@ export default function ColorPage() {
       
 
       <button className="bg-red-600 text-white px-3 py-1 rounded">
-        Delete
+        <Delete
+         id ={item._id}endpoint="color"/>
       </button>
     </div>
   </td>

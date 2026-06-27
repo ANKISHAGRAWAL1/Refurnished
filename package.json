@@ -14,8 +14,10 @@
     "express": "^5.2.1",
     "express-fileupload": "^1.5.2",
     "mongoose": "^9.7.0",
+    "react-hook-form": "^7.80.0",
     "react-select": "^5.10.2",
     "react-toastify": "^11.1.0",
+    "slugify": "^1.6.9",
     "sweetalert2": "^11.26.25"
   },
   "devDependencies": {

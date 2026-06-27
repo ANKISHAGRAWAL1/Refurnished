@@ -66,6 +66,23 @@ return response.data
 };
 
 
+export const getseries= async () => {
+  try {
+    const response = await client.get("series");
+    if(!response.data.success){
+    throw new Error( response.data.message || "Fail Api")
+}
+return response.data
+ 
+  } catch (error) {
+    console.log(error);
+    throw new Error
+  }
+
+};
+
+
+
 
 
 export const findbrandByslug = async (slug) => {
@@ -82,4 +99,23 @@ export const findbrandByslug = async (slug) => {
     console.log(error);
     throw new Error(error.message || "Something went wrong");
   }
+};
+
+
+// get model 
+
+
+export const getmodel= async () => {
+  try {
+    const response = await client.get("model");
+    if(!response.data.success){
+    throw new Error( response.data.message || "Fail Api")
+}
+return response.data
+ 
+  } catch (error) {
+    console.log(error);
+    throw new Error
+  }
+
 };
